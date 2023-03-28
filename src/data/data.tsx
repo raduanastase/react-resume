@@ -14,17 +14,9 @@ import LinkedInIcon from '../components/Icon/LinkedInIcon';
 import StackOverflowIcon from '../components/Icon/StackOverflowIcon';
 import TwitterIcon from '../components/Icon/TwitterIcon';
 import heroImage from '../images/header-background.webp';
-import porfolioImage1 from '../images/portfolio/portfolio-1.jpg';
-import porfolioImage2 from '../images/portfolio/portfolio-2.jpg';
-import porfolioImage3 from '../images/portfolio/portfolio-3.jpg';
-import porfolioImage4 from '../images/portfolio/portfolio-4.jpg';
-import porfolioImage5 from '../images/portfolio/portfolio-5.jpg';
-import porfolioImage6 from '../images/portfolio/portfolio-6.jpg';
-import porfolioImage7 from '../images/portfolio/portfolio-7.jpg';
-import porfolioImage8 from '../images/portfolio/portfolio-8.jpg';
-import porfolioImage9 from '../images/portfolio/portfolio-9.jpg';
-import porfolioImage10 from '../images/portfolio/portfolio-10.jpg';
-import porfolioImage11 from '../images/portfolio/portfolio-11.jpg';
+import porfolioImage1 from '../images/portfolio/portfolio-1.png';
+import porfolioImage2 from '../images/portfolio/portfolio-2.png';
+import porfolioImage3 from '../images/portfolio/portfolio-3.png';
 import profilepic from '../images/profilepic.jpg';
 import testimonialImage from '../images/testimonial.webp';
 import {
@@ -40,12 +32,27 @@ import {
   TimelineItem,
 } from './dataDef';
 
+const BIRTH_DATE = '09/27/1989';
+const START_WORK_DATE = '06/01/2011';
+const getAge = (date: string): number => {
+  const birthDate = new Date(date);
+  const today = new Date();
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+
+  return age;
+};
+
 /**
  * Page meta data
  */
 export const homePageMeta: HomepageMeta = {
-  title: 'React Resume Template',
-  description: "Example site built with Tim Baker's react resume template",
+  title: 'Radu Anastase Resume',
+  description: "This is my CV as a React site",
 };
 
 /**
@@ -69,18 +76,17 @@ export type SectionId = typeof SectionId[keyof typeof SectionId];
  */
 export const heroData: Hero = {
   imageSrc: heroImage,
-  name: `I'm Tim Baker.`,
+  name: `Hi, I'm Radu Anastase`,
   description: (
     <>
       <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
-        I'm a Victoria based <strong className="text-stone-100">Full Stack Software Engineer</strong>, currently working
-        at <strong className="text-stone-100">Instant Domains</strong> helping build a modern, mobile-first, domain
-        registrar and site builder.
+        I'm a Romania based <strong className="text-stone-100">Frontend Software Engineer</strong>, with {getAge(START_WORK_DATE)}+ years of experience,
+        helping companies design and create high quality software solutions.
       </p>
       <p className="prose-sm text-stone-200 sm:prose-base lg:prose-lg">
-        In my free time time, you can catch me training in <strong className="text-stone-100">Muay Thai</strong>,
-        plucking my <strong className="text-stone-100">banjo</strong>, or exploring beautiful{' '}
-        <strong className="text-stone-100">Vancouver Island</strong>.
+        In my free time time, you can catch me creating Bible games for children for <strong>FunBible.net</strong>,
+        reading <strong className="text-stone-100">comic books</strong>,
+        playing some <strong className="text-stone-100">ping pong</strong>, or almost dying from <strong>CrossFit</strong>.
       </p>
     </>
   ),
@@ -104,16 +110,15 @@ export const heroData: Hero = {
  */
 export const aboutData: About = {
   profileImageSrc: profilepic,
-  description: `Use this bio section as your way of describing yourself and saying what you do, what technologies you like
-  to use or feel most comfortable with, describing your personality, or whatever else you feel like throwing
-  in.`,
+  description: `I'm a proud father of two, dedicated to create a positive impact in the world. I'm curious about new tech
+  and always eager to learn new things. I'm fond of React + TypeScript combination, but I do my best to find the best tech stack for each project.`,
   aboutItems: [
-    {label: 'Location', text: 'Victoria, BC', Icon: MapIcon},
-    {label: 'Age', text: '29', Icon: CalendarIcon},
-    {label: 'Nationality', text: 'Canadian / Irish', Icon: FlagIcon},
-    {label: 'Interests', text: 'Motorcycles, Muay Thai, Banjos', Icon: SparklesIcon},
-    {label: 'Study', text: 'University of Victoria', Icon: AcademicCapIcon},
-    {label: 'Employment', text: 'Instant Domains, inc.', Icon: OfficeBuildingIcon},
+    {label: 'Location', text: 'Brasov, Romania', Icon: MapIcon},
+    {label: 'Age', text: String(getAge(BIRTH_DATE)), Icon: CalendarIcon},
+    {label: 'Nationality', text: 'Romanian', Icon: FlagIcon},
+    {label: 'Interests', text: 'Education, comic books, ping pong', Icon: SparklesIcon},
+    {label: 'Study', text: 'Polytechnic University of Bucharest', Icon: AcademicCapIcon},
+    {label: 'Employment', text: 'Full time contractor', Icon: OfficeBuildingIcon},
   ],
 };
 
@@ -122,36 +127,31 @@ export const aboutData: About = {
  */
 export const skills: SkillGroup[] = [
   {
-    name: 'Spoken languages',
-    skills: [
-      {
-        name: 'English',
-        level: 10,
-      },
-      {
-        name: 'French',
-        level: 4,
-      },
-      {
-        name: 'Spanish',
-        level: 3,
-      },
-    ],
-  },
-  {
     name: 'Frontend development',
     skills: [
       {
-        name: 'React',
+        name: 'JavaScript',
         level: 9,
       },
       {
-        name: 'Typescript',
+        name: 'TypeScript',
         level: 7,
       },
       {
-        name: 'GraphQL',
-        level: 6,
+        name: 'React',
+        level: 8,
+      },
+      {
+        name: 'Angular',
+        level: 8,
+      },
+      {
+        name: 'Redux',
+        level: 7,
+      },
+      {
+        name: 'RxJs',
+        level: 7,
       },
     ],
   },
@@ -160,35 +160,23 @@ export const skills: SkillGroup[] = [
     skills: [
       {
         name: 'Node.js',
-        level: 8,
-      },
-      {
-        name: 'Rust',
-        level: 5,
-      },
-      {
-        name: 'Golang',
         level: 4,
-      },
+      }
     ],
   },
   {
-    name: 'Mobile development',
+    name: 'Spoken languages',
     skills: [
       {
-        name: 'React Native',
+        name: 'Romanian',
+        level: 10,
+      },
+      {
+        name: 'English',
         level: 9,
-      },
-      {
-        name: 'Flutter',
-        level: 4,
-      },
-      {
-        name: 'Swift',
-        level: 3,
-      },
+      }
     ],
-  },
+  }
 ];
 
 /**
@@ -196,70 +184,22 @@ export const skills: SkillGroup[] = [
  */
 export const portfolioItems: PortfolioItem[] = [
   {
-    title: 'Project title 1',
-    description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
+    title: 'FunBible.net',
+    description: 'This project was created right in the midst of the pandemic to help parents and children find activities and games on biblical themes.',
+    url: 'https://funbible.net',
     image: porfolioImage1,
   },
   {
-    title: 'Project title 2',
-    description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
+    title: 'AskData.com',
+    description: 'Askdata is the first platform that makes data interaction frictionless.',
+    url: 'https://askdata.com',
     image: porfolioImage2,
   },
   {
-    title: 'Project title 3',
-    description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
+    title: 'Farmers Business Network',
+    description: 'FBN helps Family Farmers maximize their profit potential with data and technology, direct-to-farm commerce, community and a sustainability platform.',
+    url: 'https://fbn.com',
     image: porfolioImage3,
-  },
-  {
-    title: 'Project title 4',
-    description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
-    image: porfolioImage4,
-  },
-  {
-    title: 'Project title 5',
-    description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
-    image: porfolioImage5,
-  },
-  {
-    title: 'Project title 6',
-    description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
-    image: porfolioImage6,
-  },
-  {
-    title: 'Project title 7',
-    description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
-    image: porfolioImage7,
-  },
-  {
-    title: 'Project title 8',
-    description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
-    image: porfolioImage8,
-  },
-  {
-    title: 'Project title 9',
-    description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
-    image: porfolioImage9,
-  },
-  {
-    title: 'Project title 10',
-    description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
-    image: porfolioImage10,
-  },
-  {
-    title: 'Project title 11',
-    description: 'Give a short description of your project here.',
-    url: 'https://timbaker.me',
-    image: porfolioImage11,
   },
 ];
 
@@ -268,15 +208,9 @@ export const portfolioItems: PortfolioItem[] = [
  */
 export const education: TimelineItem[] = [
   {
-    date: 'April 2007',
-    location: 'Clown college',
-    title: 'Masters in Beer tasting',
-    content: <p>Describe your experience at school, what you learned, what useful skills you have acquired etc.</p>,
-  },
-  {
-    date: 'March 2003',
-    location: 'School of Business',
-    title: 'What did you study 101',
+    date: 'June 2012',
+    location: 'Polytechnic University of Bucharest',
+    title: 'Bachelor\'s Degree in Automation and Computer Science',
     content: <p>Describe your experience at school, what you learned, what useful skills you have acquired etc.</p>,
   },
 ];
@@ -313,20 +247,20 @@ export const testimonial: TestimonialSection = {
   imageSrc: testimonialImage,
   testimonials: [
     {
-      name: 'John Doe',
-      text: 'Use this as an opportunity to promote what it is like to work with you. High value testimonials include ones from current or past co-workers, managers, or from happy clients.',
+      name: 'Mircea Dinoiu',
+      text: 'I\'ve been working with Radu for several years now. Overall it was one of the most productive professional relationships I had.\n' +
+          'His maturity, responsibility for every day work and attention to deliver a great product rather than a good product are rare skills that he developed in a pretty impressing way.\n' +
+          'He can overcome any technical challenge and is open to changes and to futuristic solutions.\n' +
+          'Radu is a keeper!',
       image: 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/169.jpg',
     },
     {
-      name: 'Jane Doe',
-      text: 'Here you should write some nice things that someone has said about you. Encourage them to be specific and include important details (notes about a project you were on together, impressive quality produced, etc).',
+      name: 'Octavian Lelescu',
+      text: 'I worked with Radu in the same development team at Softvision and it was a pleasure to work with him. \n' +
+          'Besides being a joy to work with, Radu is a take-charge person who is able to present creative ideas and communicate the benefits. \n' +
+          'For these reasons, and many others, I highly recommend Radu and would make a great asset to any organization.',
       image: 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/14.jpg',
-    },
-    {
-      name: 'Someone else',
-      text: 'Add several of these, and keep them as fresh as possible, but be sure to focus on quality testimonials with strong highlights of your skills/work ethic.',
-      image: 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/69.jpg',
-    },
+    }
   ],
 };
 
@@ -340,23 +274,28 @@ export const contact: ContactSection = {
   items: [
     {
       type: ContactType.Email,
-      text: 'reachout@timbaker.me',
-      href: 'mailto:reachout@timbaker.me',
+      text: 'raduanastasedev@gmail.com',
+      href: 'mailto:raduanastasedev@gmail.com',
     },
     {
       type: ContactType.Location,
-      text: 'Victoria BC, Canada',
-      href: 'https://www.google.ca/maps/place/Victoria,+BC/@48.4262362,-123.376775,14z',
+      text: 'Brasov, Romania',
+      href: 'https://goo.gl/maps/pNMTtu9EppCwvveT7',
     },
     {
       type: ContactType.Instagram,
-      text: '@tbakerx',
-      href: 'https://www.instagram.com/tbakerx/',
+      text: '@radu_anastase',
+      href: 'https://www.instagram.com/radu_anastase/',
     },
     {
       type: ContactType.Github,
-      text: 'tbakerx',
-      href: 'https://github.com/tbakerx',
+      text: 'raduanastase',
+      href: 'https://github.com/raduanastase',
+    },
+    {
+      type: ContactType.Twitter,
+      text: 'radu_anastase',
+      href: 'https://twitter.com/radu_anastase',
     },
   ],
 };
@@ -365,9 +304,9 @@ export const contact: ContactSection = {
  * Social items
  */
 export const socialLinks: Social[] = [
-  {label: 'Github', Icon: GithubIcon, href: 'https://github.com/tbakerx'},
-  {label: 'Stack Overflow', Icon: StackOverflowIcon, href: 'https://stackoverflow.com/users/8553186/tim-baker'},
-  {label: 'LinkedIn', Icon: LinkedInIcon, href: 'https://www.linkedin.com/in/timbakerx/'},
-  {label: 'Instagram', Icon: InstagramIcon, href: 'https://www.instagram.com/tbakerx/'},
-  {label: 'Twitter', Icon: TwitterIcon, href: 'https://twitter.com/TimBakerx'},
+  {label: 'Github', Icon: GithubIcon, href: 'https://github.com/raduanastase'},
+  {label: 'Stack Overflow', Icon: StackOverflowIcon, href: 'https://stackoverflow.com/users/2806832/raduanastase'},
+  {label: 'LinkedIn', Icon: LinkedInIcon, href: 'https://www.linkedin.com/in/raduanastase/'},
+  {label: 'Instagram', Icon: InstagramIcon, href: 'https://www.instagram.com/radu_anastase/'},
+  {label: 'Twitter', Icon: TwitterIcon, href: 'https://twitter.com/radu_anastase'},
 ];
